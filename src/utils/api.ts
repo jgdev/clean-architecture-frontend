@@ -2,7 +2,7 @@ import { reactive, unref } from "vue";
 import { FetchAction, PaginatedParams, PaginatedResult } from "../types";
 import { authSession } from "../api";
 
-const apiUrl = "http://10.0.0.174:3001"
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
 export const createFetchAction = <T, K = any>(
   apiEndpoint: string,

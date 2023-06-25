@@ -24,8 +24,7 @@ const onPerformOperation = async (operationType: string, args: any[]) => {
 }
 
 const checkResourceAuthError = (error: any) => {
-  console.log(error)
-  if (error && error && error.statusCode === 401) {
+  if (error && error && error.statusCode === 401 || error.message && error.message.includes('NetworkError')) {
     console.log('Login out')
     authSession.result = ''
     window.localStorage.clear()
