@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/vue/24/outline' 
+// import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/vue/24/outline' 
 </script>
 <template>
   <div class="flex items-center justify-between">

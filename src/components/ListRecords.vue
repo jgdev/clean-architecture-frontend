@@ -78,9 +78,9 @@ const copyResult = (record: Record) => {
 </script>
 
 <template>
-  <PerformOperation v-if="performOperation" @close="() => performOperation = false" :on-submit="onPerformOperation" />
+  <PerformOperation v-if="performOperation" :on-close="() => performOperation = false" :on-submit="onPerformOperation" />
   <div class="list-records flex flex-col">
-    <Header @performOperation="() => performOperation = true" />
+    <Header :on-perform-operation="() => performOperation = true" />
     <Table :columns="tableColumns" :data="props.records.result?.result || []" :loading="props.records.loading"
       empty-message="No records to display" class="grow">
       <template #removeItem="record">
