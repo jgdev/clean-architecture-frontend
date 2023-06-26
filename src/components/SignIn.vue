@@ -8,6 +8,7 @@ const password = ref('test123')
 
 const handleSubmit = (e: Event) => {
   e.preventDefault();
+  authSession.error = ''
   authSession.postAction({
     data: {
       email: email.value, password: password.value
@@ -34,7 +35,8 @@ watch(password, () => {
           class="mb-2" :disabled="authSession.loading" />
         <h3 class="my-4 p-0 text-sm text-red-600">{{ authSession.error?.detail || authSession.error?.msg ||
           authSession.error }}</h3>
-        <Button color="light" type="submit" :disabled="authSession.loading">{{ authSession.loading ? 'Please wait ...' : 'Submit'
+        <Button color="light" type="submit" :disabled="authSession.loading">{{ authSession.loading ? 'Please wait ...' :
+          'Submit'
         }}</Button>
       </form>
     </div>

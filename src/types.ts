@@ -6,6 +6,7 @@ export type PaginatedParams = {
 
 export type PaginatedResult<T> = PaginatedParams & {
   result: T[];
+  total?: number;
 };
 
 export type Operation = {
@@ -31,13 +32,19 @@ export type User = {
   balance: number;
 };
 
+export type ReqParams<T> = RequestInit & {
+  querystring?: any;
+  data?: T;
+  params?: any;
+};
+
 export type FetchAction<T, K = any> = {
   loading: boolean;
   error?: any;
   result?: T | undefined;
-  getAction: (options?: RequestInit & { querystring?: K }) => Promise<any>;
-  postAction: (options?: RequestInit & { data?: K }) => Promise<any>;
-  delAction: (options?: RequestInit & { data?: K }) => Promise<any>;
+  getAction: (options?: ReqParams<K>) => Promise<any>;
+  postAction: (options?: ReqParams<K>) => Promise<any>;
+  delAction: (options?: ReqParams<K>) => Promise<any>;
 };
 
 export type FetchResources<T> = FetchAction<

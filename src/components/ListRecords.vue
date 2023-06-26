@@ -7,6 +7,7 @@ import Table from './Table.vue';
 import Header from './Header.vue';
 import PerformOperation from './PerformOperation.vue';
 import { formatAmount, limitCharacters } from '../utils/format';
+import { records } from '../api';
 
 type Props = {
   records: FetchResources<Record>
@@ -27,23 +28,30 @@ const getOperationLabel = (operationType: string) => {
       return "Random String"
     case "square_root":
       return "Square Root"
+    case "division":
+      return "Division"
     default:
       return "Not supported"
   }
 }
 
+const multipleNumberOperationDisplay = (symbol: string, record: Record) => {
+  return record.operationArgs.reduce((result, _, index) => {
+    const nextItem = record.operationArgs[index + 1]
+    return nextItem ? `${result} ${symbol} ${nextItem}` : `${result} = ${record.operationResult}`
+  }, record.operationArgs[0])
+}
+
 const displayOperation = (record: Record) => {
   switch (record.operationType) {
     case "addition":
-      return record.operationArgs.reduce((result, _, index) => {
-        const nextItem = record.operationArgs[index + 1]
-        return nextItem ? `${result} + ${nextItem}` : `${result} = ${record.operationResult}`
-      }, record.operationArgs[0])
+      return multipleNumberOperationDisplay('+', record)
     case "subtraction":
-      return record.operationArgs.reduce((result, _, index) => {
-        const nextItem = record.operationArgs[index + 1]
-        return nextItem ? `${result} - ${nextItem}` : `${result} = ${record.operationResult}`
-      }, record.operationArgs[0])
+      return multipleNumberOperationDisplay('-', record)
+    case "multiplication":
+      return multipleNumberOperationDisplay('*', record)
+    case "division":
+      return multipleNumberOperationDisplay('/', record)
     case "random_string":
     case "random_string_v2":
     case "square_root":
@@ -75,6 +83,12 @@ const copyResult = (record: Record) => {
   copiedResultId.value = record.id;
   navigator.clipboard.writeText(displayOperation(record));
 }
+
+const onChangePagination = (params: any) => {
+  records.getAction({
+    querystring: params
+  })
+}
 </script>
 
 <template>
@@ -82,14 +96,17 @@ const copyResult = (record: Record) => {
   <div class="list-records flex flex-col">
     <Header :on-perform-operation="() => performOperation = true" />
     <Table :columns="tableColumns" :data="props.records.result?.result || []" :loading="props.records.loading"
-      empty-message="No records to display" class="grow">
+      :on-change-pagination="onChangePagination" empty-message="No records to display" class="grow">
       <template #removeItem="record">
-        <TrashIcon class="w-4 h-4 hover:text-indigo-500 cursor-pointer" @click="() => handleDeleteRecord(record)"/>
+        <TrashIcon class="w-4 h-4 hover:text-indigo-500 cursor-pointer" @click="() => handleDeleteRecord(record)" />
       </template>
       <template #result="record">
         <div class="flex justify-between w-44" @mouseleave="() => copiedResultId = ''">
-          <span>{{ limitCharacters(displayOperation(record), 12) }}</span>
-          <span class="hidden group-hover:block text-indigo-500 cursor-pointer font-bold font-xs" :class="copiedResultId === record.id && '!text-green-500' || ''" @click="() => copyResult(record)">{{ copiedResultId === record.id ? 'COPIED' : 'COPY' }}</span>
+          <span class="relative" :title="record.operationResult">{{ limitCharacters(displayOperation(record), 12)
+          }}</span>
+          <span class="hidden group-hover:block text-indigo-500 cursor-pointer font-bold font-xs"
+            :class="copiedResultId === record.id && '!text-green-500' || ''" @click="() => copyResult(record)">{{
+              copiedResultId === record.id ? 'COPIED' : 'COPY' }}</span>
         </div>
       </template>
     </Table>

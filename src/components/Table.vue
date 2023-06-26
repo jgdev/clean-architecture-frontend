@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import { Spinner } from 'flowbite-vue'
-import { user, records } from '../api'
+import { user, records, deleteRecord } from '../api'
 import { Record } from '../types'
 import Pagination from './Pagination.vue'
+import { computed } from 'vue'
 
 type Column<T> = {
   label?: string
@@ -15,21 +16,24 @@ export type Props<T> = {
   columns: Column<T>[]
   data: any[]
   emptyMessage?: string;
-  loading?: boolean
+  loading?: boolean;
+  onChangePagination: (params: any) => void
 }
 
 defineProps<Props<Record>>()
+
+const loading = computed(() => user.loading || records.loading || deleteRecord.loading)
 </script>
 
 <template>
   <div class="flex flex-col justify-between">
-    <div class="grow block overflow-y-scroll w-full table-container sm:max-w-2xl sm:m-auto">
+    <div class="grow block overflow-y-auto w-full table-container sm:max-w-3xl sm:m-auto">
       <div class="flex flex-col justify-center items-center w-full">
-        <div class="grow p-8 transition duration-300 ease-in-out" v-if="user.loading || records.loading">
+        <div class="grow p-8 transition duration-300 ease-in-out" v-if="loading">
           <Spinner size="4" color="blue" />
         </div>
         <div class="w-full">
-          <table class="table table-auto w-full" v-if="!!data.length && !records.loading && !user.loading">
+          <table class="table table-auto w-full" v-if="!!data.length && !loading">
             <thead class="text-left text-xs font-medium text-gray-700 uppercase border-b">
               <tr>
                 <th v-for="(column) in columns" scope="col" class="px-6 py-3 w-auto no-wrap">
@@ -40,8 +44,8 @@ defineProps<Props<Record>>()
             <tbody>
               <tr v-for="(item) in data || []" class="bg-white border-b hover:bg-gray-50">
                 <td class="group px-6 py-4 text-xs font-normal text-gray-700 w-full" v-for="(column) in columns">
-                  {{ column.render && column.render(item) || ''}}
-                  <slot :name="column.slotName" v-bind="item" v-if="!!column.slotName"/>
+                  {{ column.render && column.render(item) || '' }}
+                  <slot :name="column.slotName" v-bind="item" v-if="!!column.slotName" />
                 </td>
               </tr>
             </tbody>
@@ -49,8 +53,10 @@ defineProps<Props<Record>>()
         </div>
       </div>
     </div>
-    <div class="w-full bg-gray-100 border-t pagination flex items-center justify-center" v-show="!user.loading && !records.loading && !!data.length">
-      <Pagination />
+    <div class="w-full bg-gray-100 border-t pagination flex items-center justify-center"
+      v-show="!loading && !!data.length">
+      <Pagination :limit="records.result?.limit" :skip="records.result?.skip" :total="records.result?.total"
+        :on-request="$props.onChangePagination" />
     </div>
   </div>
 </template>

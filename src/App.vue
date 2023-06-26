@@ -2,11 +2,23 @@
 import SignIn from './components/SignIn.vue';
 import ListRecords from './components/ListRecords.vue';
 import { onMounted, watch } from 'vue';
-import { operations, records, authSession, user } from './api';
+import { operations, records, authSession, user, deleteRecord } from './api';
 import { Record } from './types'
+import { DEFAULT_RESULTS_LIMIT } from './constants'
+
+const getRecords = () => records.getAction({
+  querystring: {
+    limit: DEFAULT_RESULTS_LIMIT,
+    skip: 0
+  }
+})
 
 const onDeleteRecord = async (recordId: string) => {
-  console.log('Deleting record', recordId)
+  deleteRecord.delAction({
+    params: {
+      recordId
+    }
+  }).then(() => getRecords())
 }
 
 const onPerformOperation = async (operationType: string, args: any[]) => {
@@ -19,13 +31,12 @@ const onPerformOperation = async (operationType: string, args: any[]) => {
     }
   }).then((record: Record) => {
     user.result = { ...user.result!, balance: record.newUserBalance }
-    return records.getAction()
+    return getRecords()
   })
 }
 
-const checkResourceAuthError = (error: any) => {
-  if (error && error && error.statusCode === 401 || error.message && error.message.includes('NetworkError')) {
-    console.log('Login out')
+const checkResourceAuthError = (error: any, from?: string) => {
+  if (error && error && error.statusCode === 401 || error?.constructor?.name === 'TypeError' && from === 'profile') {
     authSession.result = ''
     window.localStorage.clear()
   }
@@ -34,7 +45,7 @@ const checkResourceAuthError = (error: any) => {
 const checkSession = () => {
   if (authSession.result) {
     user.getAction().then(() => {
-      records.getAction()
+      getRecords()
       operations.getAction()
     })
   }
@@ -47,7 +58,7 @@ onMounted(() => {
     checkSession();
     localStorage.setItem('auth-session-id', authSession.result || '')
   })
-  watch(() => user.error, () => checkResourceAuthError(user.error))
+  watch(() => user.error, () => checkResourceAuthError(user.error, 'profile'))
   watch(() => records.error, () => checkResourceAuthError(records.error))
   watch(() => operations.error, () => checkResourceAuthError(operations.error))
 })

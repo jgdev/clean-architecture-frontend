@@ -1,4 +1,4 @@
-import { User, Record, Operation } from "../types";
+import { User, Record, Operation, ReqParams } from "../types";
 import { createFetchAction, createFetchResourcesAction } from "../utils/api";
 
 export const user = createFetchAction<User>("/v1/profile", undefined, {
@@ -11,5 +11,14 @@ export const authSession = createFetchAction<
   string,
   { email: string; password: string }
 >("/v1/auth/sign-in", window.localStorage.getItem("auth-session-id") || "");
+
+export const deleteRecord = createFetchAction<{ recordId: string }>(
+  "/v1/records/:recordId",
+  undefined,
+  {
+    url: (url: string, options?: ReqParams<{ recordId: string }>) =>
+      url.replace(":recordId", options?.params.recordId),
+  }
+);
 
 export const authLogout = createFetchAction<void>("/v1/auth/sign-out");

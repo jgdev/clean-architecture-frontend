@@ -1,5 +1,10 @@
 import { reactive, unref } from "vue";
-import { FetchAction, PaginatedParams, PaginatedResult } from "../types";
+import {
+  FetchAction,
+  PaginatedParams,
+  PaginatedResult,
+  ReqParams,
+} from "../types";
 import { authSession } from "../api";
 
 const apiUrl = import.meta.env.VITE_API_BASE_URL;
@@ -9,6 +14,7 @@ export const createFetchAction = <T, K = any>(
   defaultValue?: T,
   transform?: {
     response?: (body: any) => any;
+    url?: (url: string, options?: ReqParams<K>) => string;
   }
 ): FetchAction<T, K> => {
   const state = reactive({
@@ -17,11 +23,7 @@ export const createFetchAction = <T, K = any>(
   }) as FetchAction<T, K>;
 
   const fetchAction = (defaultOptions: RequestInit) => {
-    return async (
-      options?: RequestInit & {
-        data?: K;
-      }
-    ): Promise<void> => {
+    return async (options?: ReqParams<K>): Promise<void> => {
       const requestOptions: RequestInit = {
         ...defaultOptions,
         ...options,
@@ -36,16 +38,22 @@ export const createFetchAction = <T, K = any>(
 
       state.loading = true;
 
-      return fetch(apiUrl + apiEndpoint, {
+      let url = apiUrl + apiEndpoint;
+      url = transform?.url ? transform.url(url, options) : url;
+
+      const querystring =
+        options?.querystring &&
+        new URLSearchParams(options?.querystring).toString();
+
+      return fetch(`${url}${(querystring && "?" + querystring) || ""}`, {
         ...requestOptions,
-        ...(requestOptions?.method !== "GET" &&
-          options?.data && {
-            body: JSON.stringify(options.data),
-            headers: {
-              ...(requestOptions.headers || {}),
-              "Content-Type": "application/json",
-            },
-          }),
+        ...(options?.data && {
+          body: JSON.stringify(options.data),
+          headers: {
+            ...(requestOptions.headers || {}),
+            "Content-Type": "application/json",
+          },
+        }),
       })
         .then(async (res) => {
           const body = await res.json();
@@ -67,7 +75,7 @@ export const createFetchAction = <T, K = any>(
     };
   };
 
-  state.delAction = fetchAction({ method: "DEL" });
+  state.delAction = fetchAction({ method: "DELETE" });
   state.postAction = fetchAction({ method: "POST" });
   state.getAction = fetchAction({ method: "GET" });
 
