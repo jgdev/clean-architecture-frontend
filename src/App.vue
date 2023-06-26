@@ -2,8 +2,8 @@
 import SignIn from './components/SignIn.vue';
 import ListRecords from './components/ListRecords.vue';
 import { onMounted, watch } from 'vue';
-import { operations, records, authSession, user, deleteRecord } from './api';
 import { Record } from './types'
+import { operations, records, authSession, user, deleteRecord, authLogout } from './api';
 import { DEFAULT_RESULTS_LIMIT } from './constants'
 
 const getRecords = (params: any = {}) => records.getAction({
@@ -67,7 +67,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <SignIn v-if="!authSession.result" />
-  <ListRecords v-if="!!authSession.result" :records="records" :operations="operations" :on-delete-record="onDeleteRecord"
+  <SignIn v-if="!authSession.result" :auth-session="authSession" />
+  <ListRecords v-if="!!authSession.result" :auth-session="authSession" :auth-logout="authLogout" :user="user"
+    :records="records" :operations="operations" :on-delete-record="onDeleteRecord"
     :on-perform-operation="onPerformOperation" />
 </template>

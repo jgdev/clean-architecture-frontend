@@ -1,18 +1,22 @@
 <script lang="ts" setup>
 import { Button, Spinner } from 'flowbite-vue';
-import { user, authLogout, authSession, records } from '../api';
 import { formatAmount } from '../utils/format';
+import { FetchAction, FetchResources, Record, User } from '../types';
 
 type Props = {
   onPerformOperation: () => void;
+  user: FetchAction<User>;
+  authLogout: FetchAction<void>
+  authSession: FetchAction<string>
+  records: FetchResources<Record>
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
 const handleLogout = (e: Event) => {
   e.preventDefault();
-  authLogout.postAction().then(() => {
-    authSession.result = ''
+  props.authLogout.postAction().finally(() => {
+    props.authSession.result = ''
   })
 }
 </script>
@@ -31,8 +35,8 @@ const handleLogout = (e: Event) => {
         <div class="flex flex-col balance items-center justify-center">
           <span class="text-xs font-bold" v-if="!user.loading">User balance</span>
           <div class="text-right w-full text-xs">
-            <Spinner size="4" color="blue" v-if="!!user.loading" />
-            {{ !user.loading && formatAmount(user.result?.balance || 0) || '' }}
+            <Spinner size="4" color="blue" v-if="!!user.loading" id="loading-user-balance" />
+            <span v-if="!user.loading" id="user-balance">{{ formatAmount(user.result?.balance) }}</span>
           </div>
         </div>
       </div>

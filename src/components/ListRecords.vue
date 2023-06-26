@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { TrashIcon } from '@heroicons/vue/24/outline'
 import dayjs from 'dayjs'
-import { Record, Operation, FetchResources } from '../types'
+import { Record, Operation, FetchResources, FetchAction, User } from '../types'
 import Table from './Table.vue';
 import Header from './Header.vue';
 import PerformOperation from './PerformOperation.vue';
@@ -13,6 +13,9 @@ import { DEFAULT_RESULTS_LIMIT } from '../constants';
 type Props = {
   records: FetchResources<Record>
   operations: FetchResources<Operation>
+  user: FetchAction<User>
+  authSession: FetchAction<string>
+  authLogout: FetchAction<void>
   onDeleteRecord: (recordId: string, params: any) => Promise<void>
   onPerformOperation: (operationId: string, args: any[]) => Promise<void>
 }
@@ -58,8 +61,9 @@ const displayOperation = (record: Record) => {
       return multipleNumberOperationDisplay('/', record)
     case "random_string":
     case "random_string_v2":
-    case "square_root":
       return record.operationResult;
+    case "square_root":
+      return `√ ${record.operationArgs[0]} = ${record.operationResult}`
     default:
       return "Not supported"
   }
@@ -99,10 +103,12 @@ const onChangePagination = (params: any) => {
 </script>
 
 <template>
-  <PerformOperation v-if="performOperation" :on-close="() => performOperation = false" :on-submit="onPerformOperation" />
+  <PerformOperation v-if="performOperation" :on-close="() => performOperation = false" :on-submit="onPerformOperation"
+    :operations="operations" />
   <div class="list-records flex flex-col">
-    <Header :on-perform-operation="() => performOperation = true" />
-    <Table :columns="tableColumns" :data="props.records.result?.result || []" :loading="props.records.loading"
+    <Header :on-perform-operation="() => performOperation = true" :auth-logout="authLogout" :auth-session="authSession"
+      :user="user" :records="records" />
+    <Table :columns="tableColumns" :data="records.result?.result || []" :loading="records.loading"
       :on-change-pagination="onChangePagination" empty-message="No records to display" class="grow">
       <template #removeItem="record">
         <TrashIcon class="w-4 h-4 hover:text-indigo-500 cursor-pointer" @click="() => handleDeleteRecord(record)" />

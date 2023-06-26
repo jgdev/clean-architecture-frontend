@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, onUpdated, reactive, watch } from 'vue';
+import { onMounted, reactive, watch } from 'vue';
 import { TrashIcon } from "@heroicons/vue/24/outline"
 import { Button, Input, Checkbox } from 'flowbite-vue';
 
@@ -72,12 +72,6 @@ onMounted(() => {
 })
 
 watch(getInput, () => updateInputState())
-
-
-onUpdated(() => {
-  const firstInput = document.querySelector('input.operation-field');
-  (window as any).firstInput = firstInput
-})
 </script>
 <template>
   <div>
@@ -86,7 +80,7 @@ onUpdated(() => {
         <label class="text-xs p-1">{{ getLabelOf(index) }}</label>
         <Input size="sm" class="w-full operation-field" :disabled="loading" :placeholder="getPlaceholderOf(index)"
           autocomplete="off" v-model="state.inputs[key].value"
-          @change="() => updateInputValues(state.inputs, state.options)" required :max="state.input?.maxLength || 0"
+          @change="() => updateInputValues(state.inputs, state.options)" required :max="state.input?.maxLength"
           :type="state.input?.type" />
       </div>
       <TrashIcon :class="`mt-6 ml-2 mr-4 w-5 h-5 text-gray-800 hover:text-blue-500 cursor-pointer`"

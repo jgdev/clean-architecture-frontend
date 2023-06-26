@@ -1,4 +1,4 @@
-export const formatAmount = (amount: number) => {
+export const formatAmount = (amount?: number) => {
   return amount.toLocaleString("en-US", {
     style: "currency",
     currency: "USD",
@@ -7,5 +7,5 @@ export const formatAmount = (amount: number) => {
 };
 
 export const limitCharacters = (str: string, limit: number) => {
-  return str.length > limit ? str.substring(0, limit) + '...' : str
-}
+  return str.length > limit ? str.substring(0, limit) + "..." : str;
+};
