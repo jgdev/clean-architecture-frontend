@@ -10,5 +10,8 @@ export default {
     extend: {},
   },
   plugins: [require("flowbite/plugin")],
-  safelist: [{ pattern: /^(fill|bg|text|border)-[^/]+$/ }],
+  safelist: [
+    { pattern: /^(fill|bg|text|border)-[^/]+$/ },
+    { pattern: /^(min-w|max-w|w)-[^/]+$/ },
+  ],
 };

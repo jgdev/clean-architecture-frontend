@@ -3,6 +3,7 @@ import { ref, reactive, watch } from 'vue'
 import { Modal, Button, Spinner, Select } from 'flowbite-vue';
 import FormOperationInput from './FormOperationInput.vue';
 import { operations } from '../api';
+import { Operation } from '../types';
 
 type Props = {
   onClose: () => void
@@ -13,7 +14,8 @@ const stringGeneratorOptions = [
   ['Alphabetic', true],
   ['Uppercase', true],
   ['Lowercase', true],
-  ['Numeric', true],
+  ['Numbers', true],
+  ['Symbols', true]
 ]
 
 const mapConfiguration: { [key: string]: any } = {
@@ -21,7 +23,7 @@ const mapConfiguration: { [key: string]: any } = {
     value: 'addition', name: "Addition", input: {
       type: 'number',
       multiple: true,
-      minLength: 2,
+      minInput: 2,
       getLabel: (index: number) => index === 0 ? 'This number' : 'Plus',
       getPlaceholder: (index: number) => `Example: ${index + 1}`,
     }
@@ -30,7 +32,7 @@ const mapConfiguration: { [key: string]: any } = {
     value: 'subtraction', name: 'Subtract', input: {
       type: 'number',
       multiple: true,
-      minLength: 2,
+      minInput: 2,
       getLabel: (index: number) => index === 0 ? 'This number' : 'Substracting',
       getPlaceholder: (index: number) => `Example: ${index + 1}`,
     }
@@ -39,7 +41,7 @@ const mapConfiguration: { [key: string]: any } = {
     value: 'multiplication', name: 'Multiply', input: {
       type: 'number',
       multiple: true,
-      minLength: 2,
+      minInput: 2,
       getLabel: (index: number) => index === 0 ? 'This number' : 'Multiplied by',
       getPlaceholder: (index: number) => `Example: ${index + 1}`,
     }
@@ -48,7 +50,7 @@ const mapConfiguration: { [key: string]: any } = {
     value: 'division', name: 'Divide', input: {
       type: 'number',
       multiple: true,
-      minLength: 2,
+      minInput: 2,
       getLabel: (index: number) => index === 0 ? 'This number' : 'Divided by',
       getPlaceholder: (index: number) => `Example: ${index + 1}`,
     }
@@ -71,17 +73,22 @@ const mapConfiguration: { [key: string]: any } = {
     }
   },
   'random_string_v2': {
-    value: 'random_string_v2', name: 'Random.org Generate String', input: {
+    value: 'random_string_v2', name: 'Random String (Random.org)', input: {
       type: 'number',
       multiple: false,
       options: stringGeneratorOptions,
+      maxLength: 32,
       getLabel: () => 'String length',
       getPlaceholder: () => 'Example: 10',
     }
   }
 }
 
-const operationsConfig: any[] = (operations.result?.result || []).map(operation => mapConfiguration[operation.type]);
+const operationsConfig: any[] = (operations.result?.result || []).map(operation => mapConfiguration[operation.type]).sort((a: Operation, b: Operation) => {
+  if (a.name < b.name) return 1;
+  if (b.name < a.name) return -1;
+  return 0;
+});
 
 const form = ref<HTMLFormElement>()
 const loading = ref(false)

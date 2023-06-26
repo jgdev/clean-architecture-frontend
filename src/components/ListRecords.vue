@@ -8,11 +8,12 @@ import Header from './Header.vue';
 import PerformOperation from './PerformOperation.vue';
 import { formatAmount, limitCharacters } from '../utils/format';
 import { records } from '../api';
+import { DEFAULT_RESULTS_LIMIT } from '../constants';
 
 type Props = {
   records: FetchResources<Record>
   operations: FetchResources<Operation>
-  onDeleteRecord: (recordId: string) => Promise<void>
+  onDeleteRecord: (recordId: string, params: any) => Promise<void>
   onPerformOperation: (operationId: string, args: any[]) => Promise<void>
 }
 
@@ -25,11 +26,14 @@ const getOperationLabel = (operationType: string) => {
     case "subtraction":
       return "Subtract"
     case "random_string":
+    case "random_string_v2":
       return "Random String"
     case "square_root":
       return "Square Root"
     case "division":
       return "Division"
+    case "multiplication":
+      return "Multiplication"
     default:
       return "Not supported"
   }
@@ -62,10 +66,10 @@ const displayOperation = (record: Record) => {
 }
 
 const tableColumns = [
-  { label: 'Operation Type', render: (row: Record) => getOperationLabel(row.operationType) },
+  { label: 'Type', render: (row: Record) => getOperationLabel(row.operationType), class: "min-w-20" },
+  { label: 'Operation', slotName: 'result' },
   { label: 'Cost', render: (row: Record) => formatAmount(row.cost) },
-  { label: 'Result', slotName: 'result' },
-  { label: 'Date', render: (row: Record) => dayjs(row.date).format('MM/DD/YYYY HH:mm:ss') },
+  { label: 'Date', render: (row: Record) => dayjs(row.date).format('MM/DD/YYYY HH:mm:ss'), class: "!w-40" },
   {
     slotName: 'removeItem',
   }
@@ -74,7 +78,10 @@ const tableColumns = [
 const performOperation = ref(false)
 
 const handleDeleteRecord = (record: Record) => {
-  props.onDeleteRecord(record.id)
+  props.onDeleteRecord(record.id, {
+    limit: records.result?.limit || DEFAULT_RESULTS_LIMIT,
+    skip: records.result?.skip || 0,
+  })
 }
 
 const copiedResultId = ref('');

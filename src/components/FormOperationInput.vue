@@ -7,7 +7,8 @@ type InputOptions = {
   type: string;
   multiple?: boolean;
   options: Array<[string, boolean]>
-  minLength?: number;
+  minInput?: number;
+  maxLength?: number;
   getPlaceholder?: (index: number) => string
   getLabel?: (index: number) => string;
 }
@@ -31,7 +32,7 @@ const state = reactive<{ input: InputOptions | undefined, inputs: { [key: string
 const updateInputState = () => {
   const input = getInput();
   state.input = input;
-  state.inputs = new Array(input.minLength || 1).fill(null).reduce((result, _) => {
+  state.inputs = new Array(input.minInput || 1).fill(null).reduce((result, _) => {
     return { ...result, [crypto.randomUUID()]: { value: '' } }
   }, {})
   state.options = (input.options || []).reduce((result, _, index) => {
@@ -85,7 +86,8 @@ onUpdated(() => {
         <label class="text-xs p-1">{{ getLabelOf(index) }}</label>
         <Input size="sm" class="w-full operation-field" :disabled="loading" :placeholder="getPlaceholderOf(index)"
           autocomplete="off" v-model="state.inputs[key].value"
-          @change="() => updateInputValues(state.inputs, state.options)" required />
+          @change="() => updateInputValues(state.inputs, state.options)" required :max="state.input?.maxLength || 0"
+          :type="state.input?.type" />
       </div>
       <TrashIcon :class="`mt-6 ml-2 mr-4 w-5 h-5 text-gray-800 hover:text-blue-500 cursor-pointer`"
         v-if="!!state.input?.multiple" @click="() => handleRemoveInput(key)" />

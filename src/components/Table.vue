@@ -9,7 +9,8 @@ type Column<T> = {
   label?: string
   render?: (row: T) => any
   flex?: number;
-  slotName?: string
+  slotName?: string;
+  class?: string
 }
 
 export type Props<T> = {
@@ -32,6 +33,7 @@ const loading = computed(() => user.loading || records.loading || deleteRecord.l
         <div class="grow p-8 transition duration-300 ease-in-out" v-if="loading">
           <Spinner size="4" color="blue" />
         </div>
+        <div class="text-gray-500" v-if="!loading && !data.length">No records found</div>
         <div class="w-full">
           <table class="table table-auto w-full" v-if="!!data.length && !loading">
             <thead class="text-left text-xs font-medium text-gray-700 uppercase border-b">
@@ -43,7 +45,8 @@ const loading = computed(() => user.loading || records.loading || deleteRecord.l
             </thead>
             <tbody>
               <tr v-for="(item) in data || []" class="bg-white border-b hover:bg-gray-50">
-                <td class="group px-6 py-4 text-xs font-normal text-gray-700 w-full" v-for="(column) in columns">
+                <td class="group px-6 py-4 text-xs font-normal text-gray-700 w-full" v-for="(column) in columns"
+                  :class="column.class">
                   {{ column.render && column.render(item) || '' }}
                   <slot :name="column.slotName" v-bind="item" v-if="!!column.slotName" />
                 </td>

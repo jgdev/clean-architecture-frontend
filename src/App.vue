@@ -6,19 +6,21 @@ import { operations, records, authSession, user, deleteRecord } from './api';
 import { Record } from './types'
 import { DEFAULT_RESULTS_LIMIT } from './constants'
 
-const getRecords = () => records.getAction({
+const getRecords = (params: any = {}) => records.getAction({
   querystring: {
     limit: DEFAULT_RESULTS_LIMIT,
-    skip: 0
+    skip: 0,
+    ...params,
   }
 })
 
-const onDeleteRecord = async (recordId: string) => {
-  deleteRecord.delAction({
+const onDeleteRecord = async (recordId: string, params: any) => {
+  await deleteRecord.delAction({
     params: {
       recordId
     }
-  }).then(() => getRecords())
+  })
+  await getRecords(params)
 }
 
 const onPerformOperation = async (operationType: string, args: any[]) => {
