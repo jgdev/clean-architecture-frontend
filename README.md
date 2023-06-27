@@ -1,9 +1,10 @@
-# Truenorth Code Challenge
+# Arithmetic Calculator web app
 
-### Installation
+### Local setup
 
 - Required node version: v18.16 or higher
 - Run `npm install -g pnpm` and then `pnpm install`
+- Copy the file `.env.example` and rename it to `.env`
 
 #### Environment variables
 
