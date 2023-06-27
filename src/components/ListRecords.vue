@@ -7,7 +7,6 @@ import Table from './Table.vue';
 import Header from './Header.vue';
 import PerformOperation from './PerformOperation.vue';
 import { formatAmount, limitCharacters } from '../utils/format';
-import { records } from '../api';
 import { DEFAULT_RESULTS_LIMIT } from '../constants';
 
 type Props = {
@@ -16,6 +15,7 @@ type Props = {
   user: FetchAction<User>
   authSession: FetchAction<string>
   authLogout: FetchAction<void>
+  deleteRecord: FetchAction<void>
   onDeleteRecord: (recordId: string, params: any) => Promise<void>
   onPerformOperation: (operationId: string, args: any[]) => Promise<void>
 }
@@ -83,8 +83,8 @@ const performOperation = ref(false)
 
 const handleDeleteRecord = (record: Record) => {
   props.onDeleteRecord(record.id, {
-    limit: records.result?.limit || DEFAULT_RESULTS_LIMIT,
-    skip: records.result?.skip || 0,
+    limit: props.records.result?.limit || DEFAULT_RESULTS_LIMIT,
+    skip: props.records.result?.skip || 0,
   })
 }
 
@@ -96,7 +96,7 @@ const copyResult = (record: Record) => {
 }
 
 const onChangePagination = (params: any) => {
-  records.getAction({
+  props.records.getAction({
     querystring: params
   })
 }
@@ -108,8 +108,9 @@ const onChangePagination = (params: any) => {
   <div class="list-records flex flex-col">
     <Header :on-perform-operation="() => performOperation = true" :auth-logout="authLogout" :auth-session="authSession"
       :user="user" :records="records" />
-    <Table :columns="tableColumns" :data="records.result?.result || []" :loading="records.loading"
-      :on-change-pagination="onChangePagination" empty-message="No records to display" class="grow">
+    <Table :records="records" :user="user" :delete-record="deleteRecord" :columns="tableColumns"
+      :data="records.result?.result || []" :loading="records.loading" :on-change-pagination="onChangePagination"
+      empty-message="No records to display" class="grow">
       <template #removeItem="record">
         <TrashIcon class="w-4 h-4 hover:text-indigo-500 cursor-pointer" @click="() => handleDeleteRecord(record)" />
       </template>

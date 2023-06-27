@@ -1,3 +1,13 @@
+export enum OperationType {
+  ADDITION = "addition",
+  SUBTRACTION = "subtraction",
+  MULTIPLICATION = "multiplication",
+  DIVISION = "division",
+  SQUARE_ROOT = "square_root",
+  RANDOM_STRING = "random_string",
+  RANDOM_STRING_V2 = "random_string_v2",
+}
+
 export type PaginatedParams = {
   limit?: number;
   skip?: number;

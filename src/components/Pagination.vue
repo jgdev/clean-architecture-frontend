@@ -38,8 +38,8 @@ const requestNext = () => {
   <div class="flex items-center justify-between">
     <div class="flex flex-1 items-center justify-between">
       <div class="flex items-center justify-center w-full gap-2">
-        <ChevronLeftIcon class="w-4 h-4 cursor-pointer" :class="canGoPrevious ? 'hover:text-blue-600' : 'text-gray-300'"
-          @click="requestPrevious" />
+        <ChevronLeftIcon class="w-4 h-4 cursor-pointer pagination-back"
+          :class="canGoPrevious ? 'hover:text-blue-600' : 'text-gray-300'" @click="requestPrevious" />
         <p class="text-sm text-gray-700">
           Showing from
           {{ ' ' }}
@@ -59,8 +59,8 @@ const requestNext = () => {
             results
           </span>
         </p>
-        <ChevronRightIcon class="w-4 h-4 cursor-pointer" :class="canGoNext ? 'hover:text-blue-600' : 'text-gray-300'"
-          @click="requestNext" />
+        <ChevronRightIcon class="w-4 h-4 cursor-pointer pagination-next"
+          :class="canGoNext ? 'hover:text-blue-600' : 'text-gray-300'" @click="requestNext" />
       </div>
     </div>
   </div>

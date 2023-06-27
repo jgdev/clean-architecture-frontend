@@ -69,6 +69,6 @@ onMounted(() => {
 <template>
   <SignIn v-if="!authSession.result" :auth-session="authSession" />
   <ListRecords v-if="!!authSession.result" :auth-session="authSession" :auth-logout="authLogout" :user="user"
-    :records="records" :operations="operations" :on-delete-record="onDeleteRecord"
+    :delete-record="deleteRecord" :records="records" :operations="operations" :on-delete-record="onDeleteRecord"
     :on-perform-operation="onPerformOperation" />
 </template>

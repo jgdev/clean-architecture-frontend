@@ -7,6 +7,7 @@ import { mapConfiguration } from '../utils/operations';
 
 type Props = {
   onClose: () => void
+  onError?: (err: any) => void
   onSubmit: (operationId: string, args: any[]) => Promise<void>
   operations: FetchResources<Operation>
 }
@@ -14,8 +15,8 @@ type Props = {
 const props = defineProps<Props>()
 
 const operationsConfig = computed(() => (props.operations.result?.result || []).map(operation => mapConfiguration[operation.type]).sort((a: Operation, b: Operation) => {
-  if (a.name < b.name) return 1;
-  if (b.name < a.name) return -1;
+  if (a.name > b.name) return 1;
+  if (b.name > a.name) return -1;
   return 0;
 }))
 
@@ -33,8 +34,9 @@ const onClose = () => {
   props.onClose();
 }
 
-const onSubmit = (e: Event) => {
+const handleFormSubmit = (e: Event) => {
   e.preventDefault();
+  e.stopPropagation()
   const inputArgs = Object.values(state.inputs).map((v: any) => Number(v?.value))
   const optionsArgs = Object.values(state.options).map((v: any) => v.value);
   loading.value = true
@@ -65,19 +67,22 @@ watch(operationSelected, () => {
 </script>
 
 <template>
-  <Modal @close="onClose" size="sm" :popup="true">
+  <Modal @close="onClose" size="sm" :popup="true" id="perform-operation-modal">
     <template #header>
       <h1>Perform operation</h1>
     </template>
     <template #body>
-      <form @submit="onSubmit" ref="form">
+      <form @submit="handleFormSubmit" ref="form">
         <Select size="sm" placeholder="Operation type" :disabled="loading" class="mb-4" :options="operationsConfig"
           v-model="operationSelected" required />
         <div class="flex flex-col gap-4">
           <FormOperationInput v-if="!!operationSelected"
-            :get-input="() => operationsConfig.find(operation => operation.value === operationSelected)?.input || null"
-            :update-input-values="(inputs: any, options: any) => handleInputsChange(inputs, options)" :loading="loading"
-            :error="error" />
+            :get-input="() => operationsConfig.find(operation => operation.value === operationSelected)?.input"
+            :update-input-values="(inputs: any, options: any) => handleInputsChange(inputs, options)"
+            :loading="loading" />
+          <div v-if="!!error" class="text-center p-4 pb-0">
+            <h3 class="text-red-600 font-bold text-sm p-0 m-0 error">{{ error }}</h3>
+          </div>
         </div>
       </form>
     </template>

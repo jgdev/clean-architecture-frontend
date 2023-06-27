@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { Spinner } from 'flowbite-vue'
-import { user, records, deleteRecord } from '../api'
-import { Record } from '../types'
+import { FetchAction, FetchResources, Record, User } from '../types'
 import Pagination from './Pagination.vue'
 import { computed } from 'vue'
 
@@ -19,11 +18,14 @@ export type Props<T> = {
   emptyMessage?: string;
   loading?: boolean;
   onChangePagination: (params: any) => void
+  user: FetchAction<User>
+  records: FetchResources<Record>
+  deleteRecord: FetchAction<void>
 }
 
-defineProps<Props<Record>>()
+const props = defineProps<Props<Record>>()
 
-const loading = computed(() => user.loading || records.loading || deleteRecord.loading)
+const loading = computed(() => props.user.loading || props.records.loading || props.deleteRecord.loading)
 </script>
 
 <template>

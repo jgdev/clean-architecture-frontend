@@ -11,7 +11,7 @@ import {
 
 import Header from "../src/components/Header.vue";
 
-describe.only("Header", () => {
+describe("Header", () => {
   let user: FetchAction<User>;
   let authSession: FetchAction<string>;
   let authLogout: FetchAction<void>;
@@ -33,7 +33,7 @@ describe.only("Header", () => {
     operations = createFakeResources<Operation>();
   });
 
-  it.only("should display user balance properly", () => {
+  it("should display user balance properly", () => {
     const wrapper = mount(Header, {
       props: {
         user,
@@ -49,7 +49,7 @@ describe.only("Header", () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it.only("should hide balance and disable controls while loading profile", () => {
+  it("should hide balance and disable controls while loading profile", () => {
     user.loading = true;
     const wrapper = mount(Header, {
       props: {

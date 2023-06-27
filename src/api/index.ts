@@ -12,7 +12,7 @@ export const authSession = createFetchAction<
   { email: string; password: string }
 >("/v1/auth/sign-in", window.localStorage.getItem("auth-session-id") || "");
 
-export const deleteRecord = createFetchAction<{ recordId: string }>(
+export const deleteRecord = createFetchAction<void>(
   "/v1/records/:recordId",
   undefined,
   {
