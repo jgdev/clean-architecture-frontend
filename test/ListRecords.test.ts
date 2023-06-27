@@ -327,4 +327,74 @@ describe("ListRecords", () => {
 
     expect(wrapper.html()).toMatchSnapshot();
   });
+
+  test("should handle orderBy and sortBy", async () => {
+    const onRequestSpy = vi.spyOn(records, "getAction");
+    props.records.result = {
+      skip: 10,
+      limit: 10,
+      total: 21,
+      result: [
+        {
+          cost: 20,
+          date: new Date(1687827719926),
+          id: "some-id",
+          newUserBalance: 10,
+          oldUserBalance: 30,
+          operationArgs: [50, 50],
+          operationId: "some-id",
+          operationResult: 100,
+          operationType: OperationType.ADDITION,
+        },
+      ],
+    };
+
+    const wrapper = mount(ListRecords, {
+      props,
+    });
+
+    expect(onRequestSpy).not.toHaveBeenCalled();
+
+    // should set operationType desc on first call
+
+    const tableHeader = wrapper.findAll("table thead tr")[0];
+    await tableHeader.findAll("th")[0].trigger("click");
+
+    expect(onRequestSpy).toHaveBeenLastCalledWith({
+      querystring: {
+        limit: DEFAULT_RESULTS_LIMIT,
+        skip: 0,
+        orderBy: "operationType",
+        sortBy: "desc",
+      },
+    });
+
+    // should set operationType asc on second call
+
+    await tableHeader.findAll("th")[0].trigger("click");
+
+    expect(onRequestSpy).toHaveBeenLastCalledWith({
+      querystring: {
+        limit: DEFAULT_RESULTS_LIMIT,
+        skip: 0,
+        orderBy: "operationType",
+        sortBy: "asc",
+      },
+    });
+
+    // should reset orderBy on third call
+
+    await tableHeader.findAll("th")[0].trigger("click");
+
+    expect(onRequestSpy).toHaveBeenLastCalledWith({
+      querystring: {
+        limit: DEFAULT_RESULTS_LIMIT,
+        skip: 0,
+        orderBy: "",
+        sortBy: "",
+      },
+    });
+
+    expect(wrapper.html()).toMatchSnapshot();
+  });
 });

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import { TrashIcon } from '@heroicons/vue/24/outline'
 import dayjs from 'dayjs'
 import { Record, Operation, FetchResources, FetchAction, User } from '../types'
@@ -70,10 +70,10 @@ const displayOperation = (record: Record) => {
 }
 
 const tableColumns = [
-  { label: 'Type', render: (row: Record) => getOperationLabel(row.operationType), class: "min-w-20" },
+  { label: 'Type', render: (row: Record) => getOperationLabel(row.operationType), class: "min-w-20", orderBy: 'operationType' },
   { label: 'Operation', slotName: 'result' },
   { label: 'Cost', render: (row: Record) => formatAmount(row.cost) },
-  { label: 'Date', render: (row: Record) => dayjs(row.date).format('MM/DD/YYYY HH:mm:ss'), class: "!w-40" },
+  { label: 'Date', render: (row: Record) => dayjs(row.date).format('MM/DD/YYYY HH:mm:ss'), class: "!w-40", orderBy: 'date' },
   {
     slotName: 'removeItem',
   }
@@ -95,9 +95,20 @@ const copyResult = (record: Record) => {
   navigator.clipboard.writeText(displayOperation(record));
 }
 
+const state = reactive({
+  pagination: {
+    limit: DEFAULT_RESULTS_LIMIT,
+    skip: 0
+  }
+})
+
 const onChangePagination = (params: any) => {
+  state.pagination = {
+    ...state.pagination,
+    ...params
+  }
   props.records.getAction({
-    querystring: params
+    querystring: state.pagination
   })
 }
 </script>

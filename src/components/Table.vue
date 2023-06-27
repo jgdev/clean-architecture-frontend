@@ -1,8 +1,10 @@
 <script lang="ts" setup>
+import { BarsArrowUpIcon } from '@heroicons/vue/24/outline'
+import { BarsArrowDownIcon } from '@heroicons/vue/24/outline'
 import { Spinner } from 'flowbite-vue'
 import { FetchAction, FetchResources, Record, User } from '../types'
 import Pagination from './Pagination.vue'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 type Column<T> = {
   label?: string
@@ -10,6 +12,7 @@ type Column<T> = {
   flex?: number;
   slotName?: string;
   class?: string
+  orderBy?: string
 }
 
 export type Props<T> = {
@@ -24,6 +27,22 @@ export type Props<T> = {
 }
 
 const props = defineProps<Props<Record>>()
+const sortBy = ref<string | undefined>('')
+const orderBy = ref<string | undefined>('')
+
+const setOrderBy = (column: Column<any>) => {
+  if (orderBy.value === column.orderBy) {
+    sortBy.value = sortBy.value === 'desc' ? 'asc' : '';
+    if (!sortBy.value) orderBy.value = ''
+  } else {
+    sortBy.value = 'desc';
+    orderBy.value = column.orderBy
+  }
+  props.onChangePagination({
+    orderBy: orderBy.value,
+    sortBy: sortBy.value
+  })
+}
 
 const loading = computed(() => props.user.loading || props.records.loading || props.deleteRecord.loading)
 </script>
@@ -40,8 +59,16 @@ const loading = computed(() => props.user.loading || props.records.loading || pr
           <table class="table table-auto w-full" v-if="!!data.length && !loading">
             <thead class="text-left text-xs font-medium text-gray-700 uppercase border-b">
               <tr>
-                <th v-for="(column) in columns" scope="col" class="px-6 py-3 w-auto no-wrap">
-                  {{ column.label || '' }}
+                <th v-for="(column) in columns" scope="col" class="px-6 py-3 w-auto no-wrap"
+                  @click="() => column.orderBy && setOrderBy(column)">
+                  <div class="flex items-center gap-2">
+                    <span>{{ column.label || '' }}</span>
+                    <div v-if="column.orderBy && orderBy === column.orderBy"
+                      :id="`order-${column.orderBy}-sort-${sortBy}`">
+                      <BarsArrowDownIcon class="w-3 h-3" v-if="sortBy === 'desc'" />
+                      <BarsArrowUpIcon class="w-3 h-3" v-if="sortBy === 'asc'" />
+                    </div>
+                  </div>
                 </th>
               </tr>
             </thead>

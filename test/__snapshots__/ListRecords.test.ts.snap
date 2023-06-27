@@ -111,11 +111,31 @@ exports[`ListRecords > should handle back pagination 1`] = `
           <table data-v-83c58b0d=\\"\\" class=\\"table table-auto w-full\\">
             <thead data-v-83c58b0d=\\"\\" class=\\"text-left text-xs font-medium text-gray-700 uppercase border-b\\">
               <tr data-v-83c58b0d=\\"\\">
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">Type</th>
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">Operation</th>
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">Cost</th>
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">Date</th>
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\"></th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Type</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Operation</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Cost</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Date</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\"></span>
+                    <!--v-if-->
+                  </div>
+                </th>
               </tr>
             </thead>
             <tbody data-v-83c58b0d=\\"\\">
@@ -187,11 +207,31 @@ exports[`ListRecords > should handle deletion properly 1`] = `
           <table data-v-83c58b0d=\\"\\" class=\\"table table-auto w-full\\">
             <thead data-v-83c58b0d=\\"\\" class=\\"text-left text-xs font-medium text-gray-700 uppercase border-b\\">
               <tr data-v-83c58b0d=\\"\\">
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">Type</th>
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">Operation</th>
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">Cost</th>
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">Date</th>
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\"></th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Type</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Operation</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Cost</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Date</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\"></span>
+                    <!--v-if-->
+                  </div>
+                </th>
               </tr>
             </thead>
             <tbody data-v-83c58b0d=\\"\\">
@@ -263,11 +303,31 @@ exports[`ListRecords > should handle next pagination 1`] = `
           <table data-v-83c58b0d=\\"\\" class=\\"table table-auto w-full\\">
             <thead data-v-83c58b0d=\\"\\" class=\\"text-left text-xs font-medium text-gray-700 uppercase border-b\\">
               <tr data-v-83c58b0d=\\"\\">
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">Type</th>
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">Operation</th>
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">Cost</th>
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">Date</th>
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\"></th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Type</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Operation</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Cost</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Date</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\"></span>
+                    <!--v-if-->
+                  </div>
+                </th>
               </tr>
             </thead>
             <tbody data-v-83c58b0d=\\"\\">
@@ -300,6 +360,102 @@ exports[`ListRecords > should handle next pagination 1`] = `
               <path stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" d=\\"M15.75 19.5L8.25 12l7.5-7.5\\"></path>
             </svg>
             <p class=\\"text-sm text-gray-700\\"> Showing from <span class=\\"font-medium\\">1</span> <span> to   <span class=\\"font-medium\\">10</span></span> <span> of   <span class=\\"font-medium\\">11</span> results </span></p><svg xmlns=\\"http://www.w3.org/2000/svg\\" fill=\\"none\\" viewBox=\\"0 0 24 24\\" stroke-width=\\"1.5\\" stroke=\\"currentColor\\" aria-hidden=\\"true\\" class=\\"w-4 h-4 cursor-pointer pagination-next hover:text-blue-600\\">
+              <path stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" d=\\"M8.25 4.5l7.5 7.5-7.5 7.5\\"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`ListRecords > should handle orderBy and sortBy 1`] = `
+"<!--v-if-->
+<div class=\\"list-records flex flex-col\\">
+  <div data-v-c970699f=\\"\\" class=\\"sm:top-auto sm:relative sm:border-b p-4 pr-4 sm:p-6 bg-gray-100 w-full border main-header\\">
+    <div data-v-c970699f=\\"\\" class=\\"sm:max-w-2xl sm:m-auto\\">
+      <div data-v-c970699f=\\"\\" class=\\"w-full flex justify-between items-center border-b mb-4 pb-4 text-gray-600\\">
+        <h1 data-v-c970699f=\\"\\" class=\\"text-sm\\">Arithmetic App</h1><a data-v-c970699f=\\"\\" href=\\"#\\" class=\\"text-sm font-bold\\">Logout</a>
+      </div>
+      <div data-v-c970699f=\\"\\" class=\\"w-full flex justify-between items-center gap-2\\"><button data-v-c970699f=\\"\\" class=\\"text-gray-900 bg-white border-gray-300 focus:outline-none focus:ring-4 font-medium rounded-lg dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:focus:ring-gray-700 hover:bg-gray-100 dark:hover:border-gray-600 px-3 py-1.5 text-gray-900 bg-white border border-gray-300 focus:outline-none focus:ring-4 focus:ring-gray-200 font-medium rounded-lg dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:focus:ring-gray-700 hover:bg-gray-100 dark:hover:border-gray-600 text-sm px-3 py-1.5 shadow\\">
+          <!----><span class=\\"\\"><!---->Perform operation<!----></span>
+          <!---->
+        </button>
+        <div data-v-c970699f=\\"\\" class=\\"flex flex-col balance items-center justify-center\\"><span data-v-c970699f=\\"\\" class=\\"text-xs font-bold\\">User balance</span>
+          <div data-v-c970699f=\\"\\" class=\\"text-right w-full text-xs\\">
+            <!--v-if--><span data-v-c970699f=\\"\\" id=\\"user-balance\\">$200.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-v-83c58b0d=\\"\\" class=\\"flex flex-col justify-between grow\\">
+    <div data-v-83c58b0d=\\"\\" class=\\"grow block overflow-y-auto w-full table-container sm:max-w-3xl sm:m-auto\\">
+      <div data-v-83c58b0d=\\"\\" class=\\"flex flex-col justify-center items-center w-full\\">
+        <!--v-if-->
+        <!--v-if-->
+        <div data-v-83c58b0d=\\"\\" class=\\"w-full\\">
+          <table data-v-83c58b0d=\\"\\" class=\\"table table-auto w-full\\">
+            <thead data-v-83c58b0d=\\"\\" class=\\"text-left text-xs font-medium text-gray-700 uppercase border-b\\">
+              <tr data-v-83c58b0d=\\"\\">
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Type</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Operation</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Cost</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Date</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\"></span>
+                    <!--v-if-->
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody data-v-83c58b0d=\\"\\">
+              <tr data-v-83c58b0d=\\"\\" class=\\"bg-white border-b hover:bg-gray-50\\">
+                <td data-v-83c58b0d=\\"\\" class=\\"group px-6 py-4 text-xs font-normal text-gray-700 w-full min-w-20\\">Addition
+                  <!--v-if-->
+                </td>
+                <td data-v-83c58b0d=\\"\\" class=\\"group px-6 py-4 text-xs font-normal text-gray-700 w-full\\">
+                  <div class=\\"flex justify-between w-44\\"><span class=\\"relative\\" title=\\"100\\">50 + 50 = 10...</span><span class=\\"hidden group-hover:block text-indigo-500 cursor-pointer font-bold font-xs\\">COPY</span></div>
+                </td>
+                <td data-v-83c58b0d=\\"\\" class=\\"group px-6 py-4 text-xs font-normal text-gray-700 w-full\\">$20.00
+                  <!--v-if-->
+                </td>
+                <td data-v-83c58b0d=\\"\\" class=\\"group px-6 py-4 text-xs font-normal text-gray-700 w-full !w-40\\">06/26/2023 21:01:59
+                  <!--v-if-->
+                </td>
+                <td data-v-83c58b0d=\\"\\" class=\\"group px-6 py-4 text-xs font-normal text-gray-700 w-full\\"> <svg xmlns=\\"http://www.w3.org/2000/svg\\" fill=\\"none\\" viewBox=\\"0 0 24 24\\" stroke-width=\\"1.5\\" stroke=\\"currentColor\\" aria-hidden=\\"true\\" class=\\"w-4 h-4 hover:text-indigo-500 cursor-pointer\\">
+                    <path stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" d=\\"M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0\\"></path>
+                  </svg></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div data-v-83c58b0d=\\"\\" class=\\"w-full bg-gray-100 border-t pagination flex items-center justify-center\\">
+      <div data-v-83c58b0d=\\"\\" class=\\"flex items-center justify-between\\">
+        <div class=\\"flex flex-1 items-center justify-between\\">
+          <div class=\\"flex items-center justify-center w-full gap-2\\"><svg xmlns=\\"http://www.w3.org/2000/svg\\" fill=\\"none\\" viewBox=\\"0 0 24 24\\" stroke-width=\\"1.5\\" stroke=\\"currentColor\\" aria-hidden=\\"true\\" class=\\"w-4 h-4 cursor-pointer pagination-back hover:text-blue-600\\">
+              <path stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" d=\\"M15.75 19.5L8.25 12l7.5-7.5\\"></path>
+            </svg>
+            <p class=\\"text-sm text-gray-700\\"> Showing from <span class=\\"font-medium\\">11</span> <span> to   <span class=\\"font-medium\\">20</span></span> <span> of   <span class=\\"font-medium\\">21</span> results </span></p><svg xmlns=\\"http://www.w3.org/2000/svg\\" fill=\\"none\\" viewBox=\\"0 0 24 24\\" stroke-width=\\"1.5\\" stroke=\\"currentColor\\" aria-hidden=\\"true\\" class=\\"w-4 h-4 cursor-pointer pagination-next hover:text-blue-600\\">
               <path stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" d=\\"M8.25 4.5l7.5 7.5-7.5 7.5\\"></path>
             </svg>
           </div>
@@ -433,11 +589,31 @@ exports[`ListRecords > should render records properly 1`] = `
           <table data-v-83c58b0d=\\"\\" class=\\"table table-auto w-full\\">
             <thead data-v-83c58b0d=\\"\\" class=\\"text-left text-xs font-medium text-gray-700 uppercase border-b\\">
               <tr data-v-83c58b0d=\\"\\">
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">Type</th>
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">Operation</th>
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">Cost</th>
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">Date</th>
-                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\"></th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Type</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Operation</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Cost</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\">Date</span>
+                    <!--v-if-->
+                  </div>
+                </th>
+                <th data-v-83c58b0d=\\"\\" scope=\\"col\\" class=\\"px-6 py-3 w-auto no-wrap\\">
+                  <div data-v-83c58b0d=\\"\\" class=\\"flex items-center gap-2\\"><span data-v-83c58b0d=\\"\\"></span>
+                    <!--v-if-->
+                  </div>
+                </th>
               </tr>
             </thead>
             <tbody data-v-83c58b0d=\\"\\">
