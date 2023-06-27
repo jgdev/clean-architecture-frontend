@@ -3,7 +3,7 @@
 ### Local setup
 
 - Required node version: v18.16 or higher
-- Run `npm install -g pnpm` and then `pnpm install`
+- Run `npm install`
 - Copy the file `.env.example` and rename it to `.env`
 
 #### Environment variables
@@ -14,6 +14,6 @@
 
 #### Commands
 
-- `pnpm dev`: Starts the website in development mode, you can expose the server to the internet using the parameter `--host`
-- `pnpm build`: Create a production ready build.
-- `pnpm test`: Run test coverage
+- `npm run dev`: Starts the website in development mode, you can expose the server to the internet using the parameter `--host`
+- `npm run build`: Create a production ready build.
+- `npm run test`: Run test coverage
